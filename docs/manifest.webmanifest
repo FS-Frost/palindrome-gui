@@ -1,6 +1,7 @@
 {
   "short_name": "Hello",
   "name": "Hello",
+  "description": "An Hello World! example",
   "icons": [
     {
       "src": "https://storage.googleapis.com/murlok-github/icon-192.png",

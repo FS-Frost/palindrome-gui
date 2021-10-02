@@ -26,20 +26,45 @@ if ("serviceWorker" in navigator) {
 }
 
 // -----------------------------------------------------------------------------
-// Init progressive app
+// Env
 // -----------------------------------------------------------------------------
-const goappEnv = {"GOAPP_ROOT_PREFIX":"/palindrome-gui","GOAPP_STATIC_RESOURCES_URL":"/palindrome-gui","GOAPP_VERSION":"8d1a18ecd89aefe48201ce0d18722546368d6b5b"};
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/palindrome-gui","GOAPP_STATIC_RESOURCES_URL":"/palindrome-gui","GOAPP_VERSION":"e07af7d30589ca4903ae1a81799c92c6c321fa23"};
 
 function goappGetenv(k) {
   return goappEnv[k];
 }
 
-let deferredPrompt;
+// -----------------------------------------------------------------------------
+// App install
+// -----------------------------------------------------------------------------
+let deferredPrompt = null;
+var goappOnAppInstallChange = function () { };
 
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
   deferredPrompt = e;
+  goappOnAppInstallChange();
 });
+
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  goappOnAppInstallChange();
+});
+
+function goappIsAppInstallable() {
+  return !goappIsAppInstalled() && deferredPrompt != null;
+}
+
+function goappIsAppInstalled() {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  return isStandalone || navigator.standalone;
+}
+
+async function goappShowInstallPrompt() {
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+}
 
 // -----------------------------------------------------------------------------
 // Keep body clean
