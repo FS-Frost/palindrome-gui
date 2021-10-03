@@ -8,8 +8,7 @@ import (
 )
 
 func initApp() {
-	app.Route("/", &hello{})
-	app.Route("/palindrome", &palindromeCheker{})
+	app.Route("/", &palindromeCheker{})
 	app.RunWhenOnBrowser()
 }
 
