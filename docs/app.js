@@ -28,7 +28,7 @@ if ("serviceWorker" in navigator) {
 // -----------------------------------------------------------------------------
 // Env
 // -----------------------------------------------------------------------------
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/palindrome-gui","GOAPP_STATIC_RESOURCES_URL":"/palindrome-gui","GOAPP_VERSION":"e07af7d30589ca4903ae1a81799c92c6c321fa23"};
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/palindrome-gui","GOAPP_STATIC_RESOURCES_URL":"/palindrome-gui","GOAPP_VERSION":"503cf38b6501d81eccf4a78027b5751675a3714c"};
 
 function goappGetenv(k) {
   return goappEnv[k];
