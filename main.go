@@ -12,8 +12,7 @@ const (
 )
 
 var (
-	autoupdateEnabled = false
-	isDevEnabled      = false
+	isDevEnabled = false
 )
 
 func main() {
@@ -24,7 +23,6 @@ func main() {
 	))
 
 	flag.BoolVar(&isDevEnabled, "dev", false, "turns on dev mode")
-	flag.BoolVar(&autoupdateEnabled, "autoupdate", false, "turns on auto-update")
 	flag.Parse()
 	initApp()
 

@@ -60,8 +60,7 @@ func appHandler() *app.Handler {
 			"web/main.css",
 		},
 		Env: app.Environment{
-			"AUTO_UPDATE_ENABLED": fmt.Sprintf("%t", autoupdateEnabled),
-			"DEV_ENABLED":         fmt.Sprintf("%t", isDevEnabled),
+			"DEV_ENABLED": fmt.Sprintf("%t", isDevEnabled),
 		},
 	}
 }
