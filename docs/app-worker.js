@@ -1,18 +1,20 @@
-const cacheName = "app-" + "cb52211d67fd2c7f94d0fd3916ba0c7a4e0aaf19";
+const cacheName = "app-" + "8cc9378231a6cdd6db99074779c7fa2247981c7c";
 
 self.addEventListener("install", event => {
-  console.log("installing app worker cb52211d67fd2c7f94d0fd3916ba0c7a4e0aaf19");
+  console.log("installing app worker 8cc9378231a6cdd6db99074779c7fa2247981c7c");
 
   event.waitUntil(
     caches.open(cacheName).
       then(cache => {
         return cache.addAll([
-          "/palindrome-gui",
-          "/palindrome-gui/app.css",
-          "/palindrome-gui/app.js",
-          "/palindrome-gui/manifest.webmanifest",
-          "/palindrome-gui/wasm_exec.js",
-          "/palindrome-gui/web/app.wasm",
+          "/",
+          "/app.css",
+          "/app.js",
+          "/manifest.webmanifest",
+          "/wasm_exec.js",
+          "/web/app.css",
+          "/web/app.wasm",
+          "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
           "https://storage.googleapis.com/murlok-github/icon-192.png",
           "https://storage.googleapis.com/murlok-github/icon-512.png",
           
@@ -36,7 +38,7 @@ self.addEventListener("activate", event => {
       );
     })
   );
-  console.log("app worker cb52211d67fd2c7f94d0fd3916ba0c7a4e0aaf19 is activated");
+  console.log("app worker 8cc9378231a6cdd6db99074779c7fa2247981c7c is activated");
 });
 
 self.addEventListener("fetch", event => {

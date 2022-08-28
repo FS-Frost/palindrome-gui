@@ -7,25 +7,26 @@ import (
 )
 
 const (
-	MODE_SERVER = "server"
-	MODE_STATIC = "static"
+	modeServer = "server"
+	modeStatic = "static"
 )
 
 func main() {
-	mode := flag.String("mode", MODE_SERVER, fmt.Sprintf(
-		"supports: '%s', '%s'. Default: '%s'",
-		MODE_STATIC,
-		MODE_SERVER,
-		MODE_SERVER,
+	mode := flag.String("mode", modeServer, fmt.Sprintf(
+		"supports: '%s', '%s'",
+		modeStatic,
+		modeServer,
 	))
 
+	isDevEnabled := flag.Bool("dev", false, "supports: 'true', 'false'. Default: 'false'")
+
 	flag.Parse()
-	initApp()
+	initApp(*isDevEnabled)
 
 	switch *mode {
-	case MODE_SERVER:
+	case modeServer:
 		startHttpServer()
-	case MODE_STATIC:
+	case modeStatic:
 		generateStaticWebsite()
 	default:
 		log.Fatalf("Unsupported mode: %s", *mode)

@@ -16,43 +16,48 @@ type palindromeCheker struct {
 	output string
 }
 
+func (p *palindromeCheker) OnAppUpdate(ctx app.Context) {
+	ctx.Reload()
+}
+
+func (p *palindromeCheker) OnNav(ctx app.Context) {
+	go startVersionChecking(ctx)
+}
+
 func (p *palindromeCheker) Render() app.UI {
-	return app.Div().Body(
-		app.H1().Text("Verificador de palíndromos"),
-		app.Input().
-			Type("text").
-			Placeholder("Ingresa una palabra...").
-			AutoFocus(true).
-			OnKeyup(p.OnKeyUp),
-		app.Br(),
-		app.Br(),
-		app.Text(p.output),
-		app.Br(),
-		app.Br(),
-		app.Div().Body(
-			app.Text("Potenciado por: "),
-			app.A().
-				Text(LIB_URL).
-				Href(LIB_URL),
+	return app.Div().Class("main columns").Body(
+		app.Div().Class("column").Body(
+			app.H1().Class("title is-2").Text("Verificador de palíndromos"),
+			app.Input().
+				Class("input").
+				Type("text").
+				Placeholder("Ingresa una palabra...").
+				AutoFocus(true).
+				OnKeyup(p.OnKeyup),
+			app.P().Text(p.output).Class("mt-3"),
+			app.Div().Class("mt-3").Body(
+				app.Text("Potenciado por: "),
+				app.A().
+					Text(LIB_URL).
+					Href(LIB_URL).
+					Target("_blank"),
+			),
 		),
 	)
 }
 
-func (p *palindromeCheker) OnKeyUp(ctx app.Context, e app.Event) {
+func (p *palindromeCheker) OnKeyup(ctx app.Context, e app.Event) {
 	input := ctx.JSSrc().Get("value").String()
-
 	if input == "" {
 		p.output = ""
 		return
 	}
 
 	isPalindrome := palindrome.IsPalindrome(input)
-	var result string
+	result := "no es palíndromo :/"
 
 	if isPalindrome {
 		result = "es palíndromo :)"
-	} else {
-		result = "no es palíndromo :/"
 	}
 
 	p.output = fmt.Sprintf("\"%s\" %s", input, result)

@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta httpequiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="text/html; charset=utf-8" httpequiv="Content-Type">
 <meta name="author" content>
 <meta name="description" content="A palindrome checker!">
 <meta name="keywords" content>
 <meta name="theme-color" content="#2d2c2c">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta property="og:url" content="http://127.0.0.1:43391/">
-<meta content property="og:title">
+<meta property="og:url" content="http://127.0.0.1:35893/">
+<meta property="og:title" content>
 <meta property="og:description" content="A palindrome checker!">
 <meta property="og:type" content="website">
 <meta property="og:image" content>
@@ -18,35 +18,37 @@
 </title>
 <link rel="icon" type="image/png" href="https://storage.googleapis.com/murlok-github/icon-192.png">
 <link rel="apple-touch-icon" href="https://storage.googleapis.com/murlok-github/icon-192.png">
-<link rel="manifest" href="/palindrome-gui/manifest.webmanifest">
-<link type="text/css" rel="stylesheet" href="/palindrome-gui/app.css">
-<script defer="true" src="/palindrome-gui/wasm_exec.js"></script>
-<script defer="true" src="/palindrome-gui/app.js"></script>
+<link href="/manifest.webmanifest" rel="manifest">
+<link rel="stylesheet" href="/app.css" type="text/css">
+<script defer="true" src="/wasm_exec.js"></script>
+<script defer="true" src="/app.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" type="text/css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="/web/app.css">
 </head>
 <body>
 <div>
-<aside class="goapp-app-info" id="app-wasm-loader">
+<aside id="app-wasm-loader" class="goapp-app-info">
 <img id="app-wasm-loader-icon" class="goapp-logo goapp-spin" src="https://storage.googleapis.com/murlok-github/icon-192.png">
 <p id="app-wasm-loader-label" class="goapp-label">
 Loading
 </p>
 </aside>
 <div id="app-pre-render">
-<div>
-<h1>
+<div class="main columns">
+<div class="column">
+<h1 class="title is-2">
 Verificador de palíndromos
 </h1>
-<input type="text" placeholder="Ingresa una palabra..." autofocus="true">
-<br>
-<br>
+<input class="input" type="text" placeholder="Ingresa una palabra..." autofocus="true">
+<p class="mt-3">
 
-<br>
-<br>
-<div>
+</p>
+<div class="mt-3">
 Potenciado por: 
-<a href="https://www.github.com/FS-Frost/palindrome">
+<a href="https://www.github.com/FS-Frost/palindrome" target="_blank">
 https://www.github.com/FS-Frost/palindrome
 </a>
+</div>
 </div>
 </div>
 </div>
