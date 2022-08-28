@@ -3,7 +3,7 @@ build:
 	go build -o app
 
 run: build
-	./app -mode=server --dev true
+	./app -mode=server --dev true --autoupdate true
 
 static: build
 	mkdir -p docs/web

@@ -11,6 +11,11 @@ const (
 	modeStatic = "static"
 )
 
+var (
+	autoupdateEnabled = false
+	isDevEnabled      = false
+)
+
 func main() {
 	mode := flag.String("mode", modeServer, fmt.Sprintf(
 		"supports: '%s', '%s'",
@@ -18,10 +23,10 @@ func main() {
 		modeServer,
 	))
 
-	isDevEnabled := flag.Bool("dev", false, "supports: 'true', 'false'. Default: 'false'")
-
+	flag.BoolVar(&isDevEnabled, "dev", false, "turns on dev mode")
+	flag.BoolVar(&autoupdateEnabled, "autoupdate", false, "turns on auto-update")
 	flag.Parse()
-	initApp(*isDevEnabled)
+	initApp()
 
 	switch *mode {
 	case modeServer:

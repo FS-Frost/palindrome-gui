@@ -37,7 +37,12 @@ func getServerVersion() (int64, error) {
 }
 
 func startVersionChecking(ctx app.Context) {
-	for range time.Tick(time.Millisecond * 500) {
+	if clientVersion == 0 {
+		fmt.Printf("Invalid client version: %d\n", clientVersion)
+		return
+	}
+
+	for range time.Tick(time.Millisecond * 1000) {
 		serverVersion, err := getServerVersion()
 
 		if err != nil {
@@ -50,7 +55,7 @@ func startVersionChecking(ctx app.Context) {
 			continue
 		}
 
-		fmt.Println("New version found, reloading...")
+		fmt.Printf("New version found (client: %d, server: %d), reloading...\n", clientVersion, serverVersion)
 		ctx.Reload()
 	}
 }

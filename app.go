@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
@@ -18,10 +19,10 @@ var (
 	clientVersion int64
 )
 
-func initApp(isDevEnabled bool) {
+func initApp() {
 	app.Route("/", &palindromeCheker{})
 
-	if !isDevEnabled {
+	if isRunningOnBrowser() && _isDevEnabled() {
 		var err error
 		clientVersion, err = getServerVersion()
 
@@ -34,6 +35,22 @@ func initApp(isDevEnabled bool) {
 	app.RunWhenOnBrowser()
 }
 
+func isRunningOnBrowser() bool {
+	return app.Getenv("GOAPP_VERSION") != ""
+}
+
+func _isDevEnabled() bool {
+	return strings.ToLower(app.Getenv("DEV_ENABLED")) == "true"
+}
+
+// func assetUrl(url string) string {
+// 	return url
+// 	// if _isDevEnabled() {
+// 	// }
+
+// 	// return "https://fs-frost.github.io/palindrome-gui/" + url
+// }
+
 func appHandler() *app.Handler {
 	return &app.Handler{
 		Name:        "Palindrome GUI",
@@ -41,6 +58,10 @@ func appHandler() *app.Handler {
 		Styles: []string{
 			"https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
 			"web/main.css",
+		},
+		Env: app.Environment{
+			"AUTO_UPDATE_ENABLED": fmt.Sprintf("%t", autoupdateEnabled),
+			"DEV_ENABLED":         fmt.Sprintf("%t", isDevEnabled),
 		},
 	}
 }
@@ -59,7 +80,8 @@ func generateStaticWebsite() {
 }
 
 func startHttpServer() {
-	http.Handle("/", appHandler())
+	handler := appHandler()
+	http.Handle("/", handler)
 	http.Handle("/version", http.HandlerFunc(handleGetVersion))
 
 	address := fmt.Sprintf(":%d", port)
