@@ -6,6 +6,7 @@ run: build
 	./app -mode=server --dev true --autoupdate true
 
 static: build
+	rm -rf docs
 	mkdir -p docs/web
-	cp web/app.wasm docs/web/app.wasm
+	cp -r web docs
 	./app -mode=static
