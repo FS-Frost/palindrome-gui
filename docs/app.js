@@ -5,7 +5,7 @@ var goappOnUpdate = function () { };
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/app-worker.js")
+    .register("/palindrome-gui/app-worker.js")
     .then(reg => {
       console.log("registering app service worker");
 
@@ -28,7 +28,7 @@ if ("serviceWorker" in navigator) {
 // -----------------------------------------------------------------------------
 // Env
 // -----------------------------------------------------------------------------
-const goappEnv = {"AUTO_UPDATE_ENABLED":"false","DEV_ENABLED":"false","GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"","GOAPP_STATIC_RESOURCES_URL":"","GOAPP_VERSION":"06a69b3d98159484da6dc880491279fcce2c0476"};
+const goappEnv = {"AUTO_UPDATE_ENABLED":"false","DEV_ENABLED":"false","GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/palindrome-gui","GOAPP_STATIC_RESOURCES_URL":"/palindrome-gui","GOAPP_VERSION":"55c9622d9ff1839a8ce956875bb93170553afda3"};
 
 function goappGetenv(k) {
   return goappEnv[k];
@@ -105,7 +105,7 @@ if (!/bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent)) {
 
   const go = new Go();
 
-  WebAssembly.instantiateStreaming(fetch("/web/app.wasm"), go.importObject)
+  WebAssembly.instantiateStreaming(fetch("/palindrome-gui/web/app.wasm"), go.importObject)
     .then(result => {
       const loaderIcon = document.getElementById("app-wasm-loader-icon");
       loaderIcon.className = "goapp-logo";

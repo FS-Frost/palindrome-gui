@@ -70,7 +70,7 @@ func generateStaticWebsite() {
 	dir := "docs"
 	handler := appHandler()
 	handler.Resources = app.GitHubPages("palindrome-gui")
-	err := app.GenerateStaticWebsite(dir, appHandler())
+	err := app.GenerateStaticWebsite(dir, handler)
 
 	if err != nil {
 		log.Fatal(err)
