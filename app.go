@@ -40,7 +40,7 @@ func appHandler() *app.Handler {
 		Description: "A palindrome checker!",
 		Styles: []string{
 			"https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
-			"/web/app.css",
+			"web/main.css",
 		},
 	}
 }
